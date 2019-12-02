@@ -1,8 +1,5 @@
 """
     列表助手模块
-    Creation date:2019.11.27
-    Author:None.K.Sun
-    Github:https://github.com/ssk1987/Helper-Classes
 """
 
 
@@ -117,5 +114,44 @@ class ListHelper:
         """
         for r in range(len(list_target) - 1):
             for c in range(r + 1, len(list_target)):
-                if func_handle(list_target[r]) > func_handle(list_target[c]):
+               if func_handle(list_target[r]) > func_handle(list_target[c]):
                     list_target[r], list_target[c] = list_target[c], list_target[r]
+
+    @staticmethod
+    def get_min(list_target, func_handle):
+        """
+            通用的获取最小元素方法
+        :param list_target: 需要搜索的列表
+        :param func_handle: 需要搜索的处理逻辑,函数类型
+                函数名(参数) --> int／str/．．．
+        :return: 最小元素
+        """
+        min_value = list_target[0]
+        for i in range(1, len(list_target)):
+            if func_handle(min_value) > func_handle(list_target[i]):
+                min_value = list_target[i]
+        return min_value
+
+    @staticmethod
+    def order_by_descending(list_target, func_handle):
+        """
+           通用的降序排列方法
+        :param list_target: 需要排序的数据
+        :param func_handle: 排序的逻辑
+            函数(参数) -->  int/float.. 需要比较的数据
+        """
+        for r in range(len(list_target) - 1):
+            for c in range(r + 1, len(list_target)):
+                if func_handle(list_target[r]) < func_handle(list_target[c]):
+                    list_target[r], list_target[c] = list_target[c], list_target[r]
+
+    @staticmethod
+    def delete_all(list_target,func_condition):
+        """
+            根据指定条件，删除元素.
+        :param list_target: 需要操作的列表
+        :param func_condition: 删除条件
+        """
+        for i in range(len(list_target)-1,-1, -1):
+            if func_condition(list_target[i]):
+                del list_target[i]
